@@ -1,0 +1,774 @@
+
+
+--- Page 1 ---
+arXiv:2507.03405v1  [cs.SE]  4 Jul 2025
+Prompt Engineering Guidelines for Using Large
+Language Models in Requirements Engineering
+Krishna Ronanki1,2[0009−0001−8242−6771], Simon Arvidsson*1,2, and Johan
+Axell*1,2
+⋆
+1 Chalmers University of Technology, Gothenburg, Sweden
+2 University of Gothenburg, Gothenburg, Sweden
+Abstract. The rapid emergence of generative AI models like Large Lan-
+guage Models (LLMs) has demonstrated its utility across various ac-
+tivities, including within Requirements Engineering (RE). Ensuring the
+quality and accuracy of LLM-generated output is critical, with prompt
+engineering serving as a key technique to guide model responses. How-
+ever, existing literature provides limited guidance on how prompt en-
+gineering can be leveraged, specifically for RE activities. The objective
+of this study is to explore the applicability of existing prompt engineer-
+ing guidelines for the effective usage of LLMs within RE. To achieve this
+goal, we began by conducting a systematic review of primary literature to
+compile a non-exhaustive list of prompt engineering guidelines. Then, we
+conducted interviews with RE experts to present the extracted guidelines
+and gain insights on the advantages and limitations of their application
+within RE. Our literature review indicates a shortage of prompt engi-
+neering guidelines for domain-specific activities, specifically for RE. Our
+proposed mapping contributes to addressing this shortage. We conclude
+our study by identifying an important future line of research within this
+field.
+Keywords: Requirements Engineering · Generative AI · Large Lan-
+guage Models · Prompt Engineering · Guidelines.
+1 Introduction
+The development of Artificial Intelligence (AI) techniques such as Natural Lan-
+guageProcessing(NLP),MachineLearning(ML)andDeepLearning(DL)meth-
+ods for various requirements engineering (RE) activities, including requirements
+classification, prioritisation, tracing, ambiguity detection, and modelling has
+been increasing Alhoshan et al. [2023b], Zhao, Liping and Alhoshan, Waad and
+Ferrari, Alessio and Letsholo, Keletso J and Ajagbe, Muideen A and Chioasca,
+Erol-Valeriu and Batista-Navarro, Riza T [2021]. It has been empirically ob-
+served that natural language is the most commonly used medium for drafting
+⋆ These authors contributed equally to this work.
+
+--- Page 2 ---
+2 Ronanki et al.
+requirements in the industrial context. This significant synergy between natu-
+ral language and requirements has led to the emergence of NLP in the field of
+RE Zhao, Liping and Alhoshan, Waad and Ferrari, Alessio and Letsholo, Keletso
+J and Ajagbe, Muideen A and Chioasca, Erol-Valeriu and Batista-Navarro, Riza
+T [2021]. Despite the advancements in NLP for RE, there is a noticeable lack
+in the application of natural language generation (NLG)-based method in sup-
+port of RE activities Zhao, Liping and Alhoshan, Waad and Ferrari, Alessio
+and Letsholo, Keletso J and Ajagbe, Muideen A and Chioasca, Erol-Valeriu and
+Batista-Navarro, Riza T [2021]. Moreover, the majority of existing state-of-the-
+art approaches for supporting RE activities and processes rely on ML/DL. These
+methods necessitate substantial amounts of task-specific labelled training data.
+One potential solution to overcome the need of large quantities of high qual-
+ity labelled training data and advance NLG within RE is using pre-trained
+generative AI models like Large Language Models (LLM). Utilising LLMs for
+performing RE activities can potentially remove the need for large amounts of
+labelled data. Recent LLMs are demonstrating increasingly impressive capabil-
+ities when performing a wide range of tasks Brown, Tom and Mann, Benjamin
+and Ryder, Nick and Subbiah, Melanie and Kaplan, Jared D and Dhariwal,
+Prafulla and Neelakantan, Arvind and Shyam, Pranav and Sastry, Girish and
+Askell, Amanda and others [2020], including their significant enhancements in
+NLP tasks Haque, Mubin Ul and Dharmadasa, Isuru and Sworna, Zarrin Tas-
+nim and Rajapakse, Roshan Namal and Ahmad, Hussain [2022]. The GPT-3.5
+LLM has demonstrated a surprising proficiency in specific technical tasks Choi,
+Jonathan H and Hickman, Kristin E and Monahan, Amy and Schwarcz, Daniel
+[2023], including RE Alhoshan et al. [2023a].
+However, the input prompts to the LLM are observed to significantly impact
+the quality of the LLM’s output Vogelsang [2024]. The emerging practice of
+utilisingcarefullyselectedandcomposednaturallanguageinstructionstoachieve
+a desirable output from an LLM is calledprompt engineering Liu and Chilton
+[2022a]. Prompt engineering plays a crucial role as the selection of prompts can
+have a significant impact on downstream tasks Perez et al. [2021]. However, there
+are no guidelines or strategies that RE practitioners can leverage to utilise LLM
+effectively.
+To address this research gap, we conducted a systematic review of primary
+studies to identify and analyse existing prompt engineering guidelines for LLMs
+and explore their applicability within RE. By mapping these guidelines to RE
+activities, we aim to bridge a gap in the literature and provide a structured
+approach for both researchers and practitioners. In order for us to realise these
+objectives, the following research questions were formed:
+RQ1: What are the existing prompt engineering guidelines for effective use
+of LLMs?
+RQ2: What are the advantages and the limitations of using these guidelines
+for the effective usage of LLMs within RE?
+RQ3: What are the relevant prompt engineering guidelines for the effective
+usage of LLMs within RE?
+
+--- Page 3 ---
+Title Suppressed Due to Excessive Length 3
+Section 2 present the relevant background literature that motivates our re-
+search goals. Section 3 describes our research design and execution. Section 4
+presents the results of the our study and answer theRQ1, RQ2 and RQ3. We
+discuss the implications of the gathered results along with the threats to valid-
+ity of our study in Section 5. Finally, in Section 6, we conclude our study and
+present potential areas for further research based on the discussed implications.
+2 Background and Related Work
+Recent research in prompt engineering has proposed guidelines for effective
+prompt engineering of generative AI models, particularly LLMs and large vi-
+sion models Liu and Chilton [2022b]. The existing research on the development
+of prompting techniques for domain-specific tasks such as RE, however, remains
+sparse with some generally applicable outcomes provided by White et al. White
+et al. [2023a]. The literature on prompt engineering guidelines and approaches
+tied specifically to RE remains limited at the time of this study, with only a few
+papers partially covering guidelines for tasks and prompt learning within RE
+activities.
+Rodriguez et al. Rodriguez et al. [2023] explore the process of prompt en-
+gineering to extract link predictions from an LLM. They provide detailed in-
+sights into their approach for constructing effective prompts and propose mul-
+tiple strategies for leveraging LLMs. Their key takeaways include the impact
+of minor changes to prompts on the quality of the outputs, the effect of chain-
+of-thought reasoning, and the importance of specifying targeted usage to get
+desired outcomes. However, this study’s biggest drawback is its limitation to
+only one task.
+Ronanki et al. Ronanki et al. [2024b] evaluate the effectiveness of 5 of the
+prompt patterns’ White et al. [2023c] ability to make GPT-3.5 turbo perform
+binary requirements classification and requirements traceability tasks. They also
+offer recommendations on which prompt pattern to use for a specific RE task and
+provide an evaluation framework as a reference for researchers and practitioners
+who want to evaluate different prompt patterns for different RE tasks. The
+results of this study are limited to only the two mentioned RE tasks and the five
+prompt patterns that were used in the experiments.
+Sasaki et al. Sasaki et al. [2024] present a systematic literature review focus-
+ing on practical applications of prompt engineering in SE. They identified and
+classified prompt engineering patterns, showcasing their application across dif-
+ferent SE tasks. They also provide a taxonomy of prompt engineering techniques
+for SE that has five categories, eleven sub-categories and twenty one patterns
+along with the problems they can applied to and the solution you receive. How-
+ever, the prompt engineering patterns covered within the study are from various
+SE tasks like code generation, testing, debugging, etc.
+The reviewed studies broadly agree that the “context” and “structure” of
+prompts significantly impact the quality of generated outputs. However, there
+is considerable variation in the recommended approaches for achieving high-
+
+--- Page 4 ---
+4 Ronanki et al.
+quality results. “Few-shot prompting” has been observed to improve the LLM
+output quality compared to alternative methods Chen et al. [2023], West et al.
+[2021]. Conversely, other studies highlight cases where few-shot prompting falls
+short, suggesting that its effectiveness depends on specific conditions Yu et al.
+[2022], Clavié et al. [2023].
+Furthermore, research on models like GPT-3, GPT-3.5, and ChatGPT indi-
+cates persistent challenges in tasks requiring emotional understanding or mathe-
+matical reasoning, regardless of the prompting approach used Yang et al. [2023].
+Additionally, these models are prone to confidently generating incorrect facts, a
+phenomenon known as hallucinations. Various studies propose mitigation strate-
+gies to address these inaccuracies Koralus and Wang-Maścianica [2023]. Recent
+studies have also explored applying prompt engineering guidelines to new do-
+mains, including SE. These studies often propose domain-specific adaptations
+of existing guidelines, expanding the applicability of prompt engineering tech-
+niques White et al. [2023a], Yu et al. [2022], Clavié et al. [2023], Chen et al.
+[2023], Yang et al. [2023]. These sources, while crucial for shaping and enhanc-
+ing our understanding of prompt engineering for LLMs, fail to address the gap
+of lack of standard prompt engineering guidelines applicable for RE activities,
+further strengthening the motivation of our study.
+Through the works of Pressman, R.S. Pressman [2005] and Sommerville,
+I. Sommerville and Sawyer [1997], the five main RE activities identified in the
+literature are elicitation, analysis, specification, validation, and management.
+These activities are crucial for successful product development and face various
+challenges. Our mapping of prompt engineering guidelines to RE was done while
+focusing primarily on these five activities.
+3 Methodology
+We conducted a systematic review of primary studies to identify prompt en-
+gineering guidelines for LLMs to answerRQ1. Then, we conducted interviews
+with three RE experts to gain insights into how the extracted guidelines can be
+used to leverage LLMs more effectively during RE activities. These interviews
+helped us gain insight into the advantages and limitations of the prompt engi-
+neering guidelines, answeringRQ2. Based on the expert’s insights, a mapping of
+relevant prompt engineering guidelines to different RE activities was performed
+following the thematic synthesis approach Cruzes and Dybå [2011]. This map-
+ping, has the potential to help RE practitioners leverage LLMs more effectively,
+and answersRQ3.
+3.1 Systematic Review of Primary Studies
+Webasedoursystematicreviewprocesspartiallyontheguidelinesforconducting
+a systematic literature review Kitchenham and Charters [2007]. To construct a
+comprehensive search strategy, we identified relevant keywords through prior
+research in related domains and a snowballing approach. Based on our research
+
+--- Page 5 ---
+Title Suppressed Due to Excessive Length 5
+objectives and questions, we formulated the following search string: (“Prompt
+Engineering” OR “Prompt Patterns” OR “Prompt Design” OR “Prompt Catalog”
+OR “Prompt Guidelines”) AND (“Large Language Models” OR “Generative AI”).
+During the initial exploration, we observed inconsistencies in terminology across
+studies. Consequently, we expanded the search string to improve coverage. The
+string was then adapted to match the interface requirements of each database
+while preserving the original keywords.
+We restricted our search to papers published from 2018 onward, as this marks
+the introduction of transformer architectures with OpenAI’s Generative Pre-
+trained Transformer (GPT) and Google’s Bidirectional Encoder Representations
+from Transformers (BERT) Vaswani et al. [2017], Devlin et al. [2018], Radford
+et al. [2018]. This time frame constraint also helps ensure relevancy and state-of-
+the-art within the field of prompt engineering to match the rapid development
+of large generative models.
+Our review covered five databases: ACM, Scopus, IEEE Xplore, ScienceDi-
+rect, and arXiv. The first four were selected due to their extensive coverage and
+credibilityincomputerscienceandsoftwareengineeringresearch.arXivwaslater
+included to capture emerging studies, given the field’s fast-paced development.
+To identify relevant primary studies for this systematic review, we applied
+inclusion and exclusion criteria, as detailed in Table 1. Each study was initially
+assessed based on its title, abstract, introduction, conclusion, and keywords. If
+ambiguity remained after this stage, a full-text review was conducted to deter-
+mine its relevance. Applying the search string to the selected databases yielded
+271 studies for initial screening. After evaluating them against the inclusion
+and exclusion criteria presented in Table 1 and removing duplicates, 28 studies
+(10.3%) were identified as primary studies.
+Inclusion criteria Exclusion criteria
+Written in English language Papers with sections or content
+in languages other than English
+Date of publication from 2018 Published prior to 2018
+Emphasises generative AI models Unrelated to generative AI models
+Focus on Natural language promptsEmphasis on model tuning
+Relevant to RQ1 Does not contain prompt engineering guidelines
+T able 1.Inclusion and exclusion criteria for the review.
+In order to conduct extraction of relevant data, the form depicted in Ta-
+ble 2 was used. This form was established in order to ensure an organised as
+well as standardised data collection process. It also facilitated the process of
+distinguishing relevant data for our research question.
+
+--- Page 6 ---
+6 Ronanki et al.
+Data Description Relevant RQ
+Year To ensure temporal relevance of the extracted prompt
+engineering guidelines
+General
+Model Type Text-to-image and text-to-text. RQ1
+Prompt MethodWhat prompt engineering techniques were studied?RQ1
+Guidelines What guidelines are presented? RQ1
+Findings Strengths or limitations of the guidelines presentedRQ1
+T able 2.Data extraction form
+3.2 Interviews: Data Collection and Analysis
+To assess the advantages and limitations of the identified prompt engineering
+guidelines and gain insights on which guidelines are relevant for the activities
+involved within the selected RE phases, we conducted semi-structured inter-
+views Robson, Colin [1993] with three experts from different academic institu-
+tions, each specialising in distinct areas of RE. The primary selection criterion
+was expertise in RE, with additional consideration given to knowledge in AI4RE
+and related fields. Experts were identified based on their academic background
+and publication history. While our study focuses on RE, the selected experts pro-
+vided diverse perspectives, spanning fields such as RE4AI and NLP4RE as well.
+Experts were contacted via email with an introduction to the study and details
+on the interview process. All interviews were conducted online via Zoom, each
+lasting approximately 30 minutes. We ensured all the interviews were conducted
+by following the ethical interview checklist presented by P.E. Strandberg Strand-
+berg, Per Erik [2019].
+We chose qualitative content analysis Drisko and Maschi [2016] to extract in-
+sights from the qualitative data collected from the interviews. The transcripts of
+the interviews were edited, validated through member checking [Seaman, C.B.,
+1999], and anonymised before we performed content analysis. We then conducted
+a thematic synthesis to map the relevant prompt engineering guidelines to dif-
+ferent activities within the selected RE phases. Our thematic synthesis approach
+was inspired by Cruzes and Dybå Cruzes and Dybå [2011], involved summaris-
+ing, integrating, and comparing findings on a specific topic to generate new
+insights, such as theories, frameworks, or conclusions. The final mapping was
+developed by integrating the insights provided by the RE experts for mapping
+of the guidelines to the RE activities.
+4 Results
+The results of this study are presented in three subsections, each corresponding
+to an RQ. Subsection 4.1 addressesRQ1, presenting a non-exhaustive list of
+prompt engineering guidelines. These guidelines are categorised into the nine
+most frequently occurring themes identified in our review. Subsection 4.2 ex-
+plores the advantages and limitations of applying the identified prompt engi-
+neering guidelines in RE based on expert interviews, providing insights neces-
+
+--- Page 7 ---
+Title Suppressed Due to Excessive Length 7
+sary for answeringRQ2. Subsection 4.3 answersRQ3by mapping the identified
+guidelines to relevant RE activities.
+4.1 Prompt Engineering Guidelines
+From the 28 included primary studies, we identified and extracted 36 prompt en-
+gineering guidelines. These guidelines were categorised into nine distinct themes
+based on their defining characteristics. Each theme was defined to capture the
+underlying concepts and group similar guidelines, providing a clearer overview
+of their overall intent and purpose.
+Context The “Context” theme revolves around guidelines that relate to con-
+textual information in any manner for prompts.
+Persona The “Persona” theme is a high-level abstraction of guidelines that
+revolves around strategies for LLMs to take on specific or different perspectives
+on specified tasks by using prompts. Persona in this instance can be compared
+to perspectives or points of view.
+Templates The “Templates” theme encapsulates guidelines that only provide
+an explicit structure of prompts, known as a template.
+Disambiguation The “Disambiguation” theme refers to guidelines that aim to
+address ambiguity, clarification, or understanding of intent.
+Reasoning The “Reasoning” theme captures guidelines that aim to affect rea-
+soning capabilities or the ability to think through complex problems or tasks in
+a generated output.
+Analysis The theme “Analysis” revolve around guidelines examining, evaluat-
+ing, or analysing information or tasks.
+Keywords The theme “Keywords” represent guidelines that involve any use of
+single-word modifiers to prompts.
+Wording The theme “Wording” refers to guidelines that relate to choices of
+words, text formatting, writing styles, or inclusion and exclusion of text.
+
+--- Page 8 ---
+8 Ronanki et al.
+Fig. 1. Theme distribution of the extracted guidelines from the studies in the review.
+Few-shot PromptsThe theme “Few-shot Prompts” categorises guidelines that
+are intended for any form of few-shot prompting.
+Each guideline was assigned to one of the nine themes and given a unique
+identifier, as listed in Table 3. This categorisation provides insight into the most
+common types of guidelines found in the literature. As shown in Fig. 1, the “Con-
+text” themeconsistsofthehighestnumberofguidelines,followedby“Reasoning”,
+“Wording”, and“Few-shot Prompts” themes. The “Persona” theme had the lowest
+number of guidelines, with only 2. To reference specific guidelines in this paper,
+we use a combination of the theme’s initial letter and the guideline’s identifier.
+For example, C1 refers to the first guideline within the “Context” theme.
+4.2 Expert Insights: Interview Analysis
+Interviews were conducted with three different RE experts, enquiring about their
+views on the advantages and the limitations of guidelines from our review and
+their possible usage for LLMs within RE activities.
+Requirements Elicitation Each of the experts interviewed emphasised the
+importance of context in prompts, especially for for requirement elicitation. Re-
+garding the advantages, Expert 2 discussed the potential of leveraging contextual
+prompts for LLMs in this process, noting that they could encourage creative
+requirements exploration. They stated, “It may be creative requirements, like
+[for the LLM] to say, hey, have you thought of this? And then a person says,
+oh, that’s a good idea, or no, that’s a bad idea.” Expert 3 emphasised that
+templates could be beneficial across various prompt-related activities and RE
+
+--- Page 9 ---
+Title Suppressed Due to Excessive Length 9
+Theme Description
+Context(C)
+1. Adding context to examples in prompts produce more efficient and informative output. Reynoldsand McDonell [2021]2. Provide context to all prompts to avoid output hallucinations. Kumar [2023]3. Provide context of the prompt to ensure a closely related output. Lubiana et al. [2023], Zhou et al.[2022a]4. The more context tokens pre-appended to prompts, the more fine-grained output.Zhou et al. [2022a]5. The Context Manager Pattern enables users to specify or remove context for a conversation withan LLM White et al. [2023b]6. Providing more context and instructions is an effective strategy to increase the semantic quality ofthe output Vogelsang [2024]
+Persona(P)
+1. Improves the generation quality by conditioning the prompt with an identity, such as “Pythonprogrammer” or “Math tutor” Wei et al. [2023]2. To explore the requirements of a software-reliant system, include:- “I want you to act as the system”,- “Use the requirements to guide your behaviour”White et al. [2023c]
+T emplates(T)
+1. To improve reasoning and common sense in output, follow a template such as:- “Reason step-by-step for the following problem. [Original prompt inserted here]” Koralus and Wang-Maścianica [2023]2. The following prompt template has shown an impressive quality of AI art:- “[Medium] [Subject] [Artist(s)] [Details] [Image repository support]”Oppenlaender et al. [2023]3. I am going to provide a template for your output; This is the template: PATTERN with PLACE-HOLDERS White et al. [2023b]
+Disambi-guation(D)
+1. Ensure any areas of potential miscommunication or ambiguity are caught, by providing a detailedscope:- “Within this scope”,- “Consider these requirements or specifications” White et al. [2023c]2. To find points of weakness in a requirements specification, consider including:- “Point out any areas of ambiguity or potentially unintended outcomes” White et al. [2023c]3. The persona prompt method can be used to consider potential ambiguities from different perspec-tives. White et al. [2023a]
+Reasoning(R)
+1. Prepending “Let’s think step by step” improves zero-shot performance. Zhou et al. [2022b]2. Extending the previously known “Let’s think step by step”, with “to reach the right conclusion,” to highlight decision-making inthe prompt. Clavié et al. [2023]3. Chain Of Thought (CoT) prompting improves LLM performance and factual inconsistency evaluationcompared to Zero-shot.Chen et al. [2023], Luo et al. [2023]4. Tree of thought (ToT) allows LLMs to perform deliberate decision making by considering multiple different reasoning pathsand self-evaluating choices to decide the next course of action Yao et al. [2024]5. The intent of the Cognitive Verifier pattern is to force the LLM to always subdivide questions into additional questions that canbe used to provide a better answer to the original question White et al. [2023b]
+Analysis(A)
+1. self-consistency boosts the performance of chain-of-thought prompting Wang et al. [2022a]2. The best of three strategy improves the LLM output stability and detecting hallucinations Ronankiet al. [2024a]3. Emotion-enhanced CoT prompting is an effective method to leverage emotional cues to enhancethe ability of ChatGPT onmental health analysis. Yang et al. [2023]
+Keywords(K)
+1. When picking the prompt, focus on the subject and style keywords instead of connecting words.Liu and Chilton [2022b]2. Pre-appending keywords to prompts are shown to greatly improve performance by providing thelanguage model withappropriate context. Gero et al. [2022]3. Modifiers/Keywords can be added to the details or image repository sections of a template suchas:- “[Medium] [Subject] [Artist(s)] [Details] [Image repository support]” Oppenlaender et al. [2023]4. The inclusion of multiple descriptive keywords tends to align results closer to expectations. Haoet al. [2022]
+W ording(W)
+1. In translation tasks, adding a newline before the phrase in a new language increases the odds thatthe output sentenceis still English. Reynolds and McDonell [2021]2. A complete sentence definition with stop words performs better as a prompt than a set of coreterms that were extractedfrom the complete sentence definition after removing the stop words. Yong et al. [2022]3. Words such as “well-known” and “often used to explain” are successful for analogy generation.Bhavya et al. [2022]4. Modifying prompts to resemble pseudocode tend to be the most successful in coding tasks. Dennyet al. [2023], White et al. [2023c]5. Prompts to contain explicit algorithmic hints in engineering tasks perform better. Denny et al.[2023]
+F ew-shotPrompts(F)
+1. Inclusion of “Question:” and “Answer:” improves the response, but rarely gives a binary answer.Trautmann et al. [2022]2. For easier understanding, number examples in few-shot prompting. West et al. [2021]3. The format of [INPUT] and [OUTPUT] should linguistically imply the relationship between them.West et al. [2021]4. Specifications can be added to each [INPUT] and [OUTPUT] pair to give extra insight into com-plicated problems. West et al. [2021]5. In Few-shot prompting include a rationale in each shot (Input-rationale-output). Wang et al.[2022b]
+T able 3.Thematic Classification of Prompt Engineering Guidelines
+
+--- Page 10 ---
+10 Ronanki et al.
+activities where LLMs provide value, specifically mentioning requirements elici-
+tation as a key application. They suggested that keyword-based guidelines can
+be appropriate for requirements elicitation.
+However, the experts also had concerns regarding the effectiveness of term
+“context” included in the guidelines, arguing how it could be ambiguous as it is
+a quite general word. Expert 3 stated “I would say that context may need to be
+decomposed in somehow because otherwise, the guideline may be too generic.”
+Expert 1 mentioned that the context that the guidelines refer to may vary de-
+pending on assumptions made by different stakeholders. Expert 2 brought up
+another limitation, on how the context may not fully cover what the stakeholders
+want, stating “So you can use it to elicit requirements, but they’re not necessarily
+requirements that anyone wants to implement.”
+Requirements Analysis Expert 2 acknowledged a potential advantage in us-
+ing LLMs to assess key qualities of requirements, stating, “If you’re asking [the
+LLM], ‘Is this maintainable? Is this verifiable? Is this unambiguous?’ then you
+could come back and say yes or no, and that might be useful.” They 2 also
+suggested that templates could be useful for analysing completeness of require-
+ments.
+However, they ultimately emphasised the limitations, explaining that the
+uncertainty surrounding the output, coupled with a lack of confidence in the
+feedback provided by LLMs, would make the results unreliable and of limited
+practical value. Expert 1 highlighted a key limitation, noting a lack of confi-
+dence in the feedback generated and the inherent uncertainty surrounding it.
+They raised concerns about the inconsistencies in LLM-generated outputs, par-
+ticularly the variability in responses even when identical prompts are used. They
+cautioned against over-reliance on templates in requirements analysis.
+Expert 1 also pointed out the difficulty in understanding how an LLM inter-
+prets reasoning steps. Similarly, Expert 2 stated, “It is only capturing one very
+narrow type of reasoning. If you are trying to get it to reason in a process view,
+like step one, step two, step three, I am not even sure that is reasoning.” They
+further questioned whether LLMs could effectively support the type of reasoning
+required in RE.
+Despite these concerns, Expert 3 noted potential advantages, stating, “It
+could be useful for the analysis of requirements towards the generation of sys-
+tem architecture” They also suggested that embedding prompting guidelines
+within LLMs could support automated sub-tasks that aid in requirements anal-
+ysis, referencing implementation approaches such as AutoGPT AutoGPT [2025].
+Overall, experts agreed that requirements analysis is likely too complex for cur-
+rent LLMs to handle effectively. They expressed scepticism about the capability
+of existing LLMs to fully support this task given their current state of develop-
+ment.
+Requirements SpecificationExpert 1 emphasised the potential to iteratively
+explore unclear aspects of requirements, stating, “You can explore, maybe even
+
+--- Page 11 ---
+Title Suppressed Due to Excessive Length 11
+iteratively, any unclear aspects of your requirements and, as I say, any ambigu-
+ities where there could be potential misunderstanding” They further suggested
+that integrating persona-based guidelines could enhance this process by enabling
+ambiguity exploration from multiple perspectives. They stressed the importance
+of justifications, explaining that there is a need for reasoning behind why a
+requirement is deemed ambiguous or weak.
+Expert 2 identified a key advantage, noting that “it [LLM] could help to
+point out weaknesses in a requirement specification” and that “prompt engi-
+neering could help point out ambiguity.” However, they also acknowledged that
+ambiguity might not always be a concern, referencing prior studies on smaller
+teams where such issues had minimal impact.
+Expert 3 exclusively highlighted advantages, emphasising that these guide-
+lines could be beneficial not only for requirement specification but also for re-
+quirements review. They provided an example related to guideline D2, stating,
+“So this is a useful prompt for sure, it’s going to change the way we make re-
+quirements reviews.” They further elaborated on the critical role of requirements
+reviews, particularly in safety-critical contexts.
+Requirements Validation Experts 1 and 3 acknowledged potential advan-
+tages of using LLMs for requirements validation. Expert 3 suggested that the use
+of LLMs in validation could be a promising area for further research. They pro-
+posed that LLMs could assist in validating requirements against the needs of spe-
+cific user types, rather than solely acting as the system itself, stating,“Validating
+requirements based on the needs of a specific user could be beneficial, instead
+of simply acting as the system.” However, they emphasised the necessity of pro-
+viding extensive descriptions of the system to the LLM within the prompts as a
+potential limitation.
+Expert 1 also noted a potential advantage in using LLMs to explore the va-
+lidity of specific goals or targets from multiple perspectives. However, they raised
+concerns regarding the role of context among different personas. In this context,
+context refers to what the personas know about the system, and a key limitation
+is determining the appropriate scope of this knowledge. Expert 1 cautioned that
+restricting the LLM’s perspective to a specific dimension of the problem could
+significantly narrow the scope of validation, making it applicable only to the
+predefined perspective. They stated, “If you limit the LLM only to look from a
+certain dimension or certain perspective on the problem, then you scope down
+your validation a lot to be only valid for that certain perspective that you define
+beforehand.” They also acknowledged a key advantage of templates, explaining
+that templates are always nice because you can validate that templates actu-
+ally work nicely beforehand, and then people can just use it without having to
+analyse if the template is good.
+Expert 2 expressed scepticism regarding the use of LLMs for requirements
+validation, stating, “I think it’s a bad idea to use the prompt engineering for
+validation.” They argued that LLMs lack the capability to determine whether a
+system is correct, making them unsuitable for requirements validation. Addition-
+
+--- Page 12 ---
+12 Ronanki et al.
+ally, Expert 3 highlighted a fundamental challenge in using LLMs for validation,
+noting that validation is the final stage of the requirements process. They ex-
+pressed uncertainty about whether current LLMs possess the necessary accuracy
+to process the substantial amount of technical information that systems typically
+require at this stage of development.
+Requirements ManagementExperts 2 and 3 identified potential advantages
+of keyword-based guidelines, particularly in their ability to assist with sorting
+and classifying requirements into categories. Expert 3 further suggested that
+these guidelines could support additional requirements management tasks, such
+as similarity analysis and traceability.
+Expert 1 focused on the role of keywords in providing context, explaining
+that they could help establish assumptions and enhance the precision of LLM-
+generated outputs. However, they also highlighted a key limitation, noting that
+increased precision could “limit the scope out of which the output can come” po-
+tentially excluding important aspects from consideration. They also pointed to a
+broader advantage of structured reasoning within LLMs, emphasising that “you
+get much better traceability or track why a certain decision has been made by
+the LLM or why a certain output was generated.” This suggests that structured
+guidelines could enhance transparency in LLM-driven requirements analysis. Ex-
+pert 3 questioned whether keywords alone would be sufficient for requirements
+management tasks, as these tasks often require in-depth project and domain
+knowledge.
+4.3 RE Activities and Applicable Guidelines
+TheproposedmappingbetweenREactivitiesandtheidentifiedguidelinethemes,
+along with the corresponding justifications, is outlined in this section. A detailed
+representation of this mapping is provided in Table 4.
+RE Phase Applicable Guidelines
+Elicitation Context, Template, Keyword
+Analysis Template, Analysis, Reasoning
+Specification Persona, Disambiguation
+Validation Persona, Template
+Management Keyword, Reasoning
+T able 4.Mapping of Guidelines and RE
+We believe the users performing requirements elicitation using LLMs can
+benefit from employing guidelines categorised under the “context”, “template”
+and “keyword” themes, presented in Table 3. This mapping was done based on
+the experts’ insights presented in detail within subsection 4.2.
+
+--- Page 13 ---
+Title Suppressed Due to Excessive Length 13
+For requirements analysis, the “template”, “analysis” and “reasoning” guide-
+lines can be useful. Guidelines such as “self-consistency” Wang et al. [2022a]
+and “best of three strategy” Ronanki et al. [2024a] can help in improving the
+consistency of the LLM output, which was a major limitation mentioned by the
+experts related to requirements analysis. The reasoning guidelines such as chain-
+of-thought and tree-of-thought can help in improving the reasoning capabilities
+of the LLMs, which is another limitation emphasised by the experts within this
+phase.
+For users performing requirements specification using LLMs can benefit from
+using “Persona” and “Disambiguation” templates. The primary reason is elim-
+inate and reduce ambiguities present within requirements specifications as per
+the experts’ opinions.
+For requirements validation using LLMs, “persona” guidelines can be helpful
+for validating requirements against the needs of specific user types. The “tem-
+plate” guidelines can help in having some predefined approaches which saves
+time by reducing the need for experimenting with finding optimal prompts for
+particular use cases.
+Finally, for users performing requirements management tasks using LLMs,
+“keyword” and “reasoning” guidelines can be most helpful. Keyword guidelines
+can help put the task being performed into appropriate contexts by establish-
+ing the right assumptions. The need for traceability and and reasoning can be
+addressed by following “reasoning” guidelines while prompting LLMs.
+5 Discussion
+One of the main objectives of this study was to explore how existing prompt
+engineering guidelines can help users in leveraging LLMs in RE activities. Our
+findings indicate that while various guidelines exist, they originate from a diverse
+range of models, including text-to-text models such as GPT-3.5 and BERT, as
+well as text-to-image and multi-modal models like DALL-E and the combination
+of CLIP and VQGAN. Although some guidelines exhibit overlap, our analysis
+reveals notable differences, suggesting that the role of prompt engineering will
+continue to grow in importance. Notably, the majority of guidelines identified
+through our literature review were mentioned only once across studies. This
+shows that, while there is much interest in improving the performance of the
+LLM through coming up various prompt based approaches, this field of study is
+still in its early stages and needs to mature before this becomes an established
+discipline of study. The guidelines and techniques need to be validated across
+broaderrangeofusecasestoreachageneralisableconclusiononwhichtechniques
+work reliably enough for which tasks and use cases and what are the constraints
+and limitations of them.
+We also examined how these guidelines apply to different RE activities by
+mapping them to guideline themes. Our interviews confirmed that while multiple
+interpretations of these mappings exist, there was general agreement on the
+value of the guideline themes. The template theme guidelines seems to the most
+
+--- Page 14 ---
+14 Ronanki et al.
+relevant ones, as they are mapped to three of the five RE activities. The keyword,
+persona and reasoning theme guidelines were mapped to two activities each
+while the context, analysis and disambiguation themes were only mapped to
+one activity. However, based on the experts’ insights, while the context and
+disambiguation guidelines are applicable to fewer use cases, they bring more
+value to the use cases they are applicable to compared to the rest of the guideline
+themes. This indicates that the prompt engineering guidelines can serve two
+major purposes: broadly apply to various RE activities and bring value to the
+tasks they are used within.
+Another interesting observation is that these seven themes of prompt engi-
+neering guidelines make up 72% of the all the prompt engineering guidelines we
+found. Some guidelines, such as those focused on few-shot prompting and word-
+ing which make up 28% of all the prompt engineering guidelines we found in our
+literature, were deemed irrelevant to RE and were not part of the mapping. This
+indicates that, while existing prompt engineering guidelines are fairly applicable
+to RE activities, there is also a risk that a good chunk of them are not. This
+points to the need for either developing new prompt engineering guidelines, spe-
+cific to RE or fine-tuning existing guidelines to make them more applicable and
+effective for RE. Overall, our findings show both the potential and limitations
+of prompt engineering guidelines for using LLMs in RE. Providing context is
+key to improving LLM performance, but more research is needed to refine these
+guidelines and explore their use in more advanced RE activities.
+5.1 Threats to Validity
+While we followed established methods and techniques for the collection and
+analysis of the data to ensure methodological rigour and soundness, it is essential
+to acknowledge and address potential threats to the validity of the findings.
+InternalValidity: Despiteselectingareviewperiodfrom2018tothepresent,
+there is a risk of omitting relevant studies. However, as large language models
+(LLMs) largely emerged after 2017, and prompt-related guidelines first appeared
+in 2021, this risk is likely minimal. Limited available literature and inconsisten-
+cies in terminology pose risks. Selection bias may arise from reviewing a re-
+stricted set of studies. Open discussions among researchers aimed to minimise
+misinterpretations.
+External Validity: The study’s findings may have limited generalisabil-
+ity due to its specific focus and the rapidly evolving field. Including unpublished
+preprints from arXiv introduces potential bias but helps capture cutting-edge re-
+search. Interviewed experts may have personal biases influencing their responses,
+potentially introducing confirmation bias.
+Construct Validity:The study’s inclusion and exclusion criteria may affect
+the construct validity. Also, the interviewed RE experts’ varying understanding
+of the terminology within the guidelines is another threat.
+
+--- Page 15 ---
+Title Suppressed Due to Excessive Length 15
+6 Conclusion
+The primary motivation to conduct and present this study was to address the
+lack of domain specific prompt engineering guidelines for using LLMs, especially
+within RE. To that extent, our study provided an overview of existing prompt
+engineering guidelines. We examined the benefits and limitations of these guide-
+lines through interviews with three RE experts. Our interviews highlighted the
+usefulness of the identified guidelines, especially for the context, template, key-
+words, analysis, reasoning, persona, and disambiguation guidelines for various
+RE activities. Based on the insights gathered from these interviews, we proposed
+a mapping for prompt engineering guidelines for different RE activities.
+We believe that as LLMs become more reliable in RE activities, they could
+help reduce errors, detect issues earlier in the process, and prevent costly correc-
+tions later in development. This, in turn, could lower project failure rates and
+improve overall efficiency in RE workflows. Our findings contribute to the im-
+provement of RE practices by supporting the development of tailored prompt en-
+gineering guidelines. Future work should explore how general prompt guidelines
+can be adapted for specific domains like RE and whether additional fine-tuning
+of these guidelines is required to make them more effective.
+
+--- Page 16 ---
+Bibliography
+Waad Alhoshan, Alessio Ferrari, and Liping Zhao. Zero-shot learning for re-
+quirements classification: An exploratory study. Information and Software
+Technology, 159:107202, 2023a.
+Waad Alhoshan, Alessio Ferrari, and Liping Zhao. Zero-shot Learning for Re-
+quirements Classification: An Exploratory Study.Information and Software
+Technology, 159:107202, 2023b.
+AutoGPT. “Empower your digital tasks with AutoGPT”, 2025. URLhttps:
+//agpt.co/. Accessed: 19/02/2025.
+Bhavya Bhavya, Jinjun Xiong, and Chengxiang Zhai. Analogy generation by
+prompting large language models: A case study of instructgpt.arXiv preprint
+arXiv:2210.04186, 2022.
+Brown, Tom and Mann, Benjamin and Ryder, Nick and Subbiah, Melanie and
+Kaplan, Jared D and Dhariwal, Prafulla and Neelakantan, Arvind and Shyam,
+Pranav and Sastry, Girish and Askell, Amanda and others. Language Models
+are Few-shot Learners.Advances in Neural Information Processing Systems,
+33:1877–1901, 2020.
+Shan Chen, Yingya Li, Sheng Lu, Hoang Van, Hugo JWL Aerts, Guergana K
+Savova, and Danielle S Bitterman. Evaluation of chatgpt family of models
+for biomedical reasoning and classification.arXiv preprint arXiv:2304.02496,
+2023.
+Choi, Jonathan H and Hickman, Kristin E and Monahan, Amy and Schwarcz,
+Daniel. ChatGPT Goes to Law School.Available at SSRN, 2023.
+Benjamin Clavié, Alexandru Ciceu, Frederick Naylor, Guillaume Soulié, and
+Thomas Brightwell. Large language models in the workplace: A case
+study on prompt engineering for job type classification. arXiv preprint
+arXiv:2303.07142, 2023.
+Daniela S. Cruzes and Tore Dybå. Research synthesis in software engineering:
+A tertiary study.Information and Software Technology, 53(5):440–455, 2011.
+ISSN 0950-5849. https://doi.org/https://doi.org/10.1016/j.infsof.
+2011.01.004. URL https://www.sciencedirect.com/science/article/
+pii/S095058491100005X. Special Section on Best Papers from XP2010.
+Paul Denny, Viraj Kumar, and Nasser Giacaman. Conversing with copilot: Ex-
+ploring prompt engineering for solving cs1 problems using natural language.
+In Proceedings of the 54th ACM Technical Symposium on Computer Science
+Education V. 1, pages 1136–1142, 2023.
+Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. Bert: Pre-
+training of deep bidirectional transformers for language understanding.arXiv
+preprint arXiv:1810.04805, 2018.
+James W Drisko and Tina Maschi.Content analysis. Oxford university press,
+2016.
+
+--- Page 17 ---
+Title Suppressed Due to Excessive Length 17
+Katy Ilonka Gero, Vivian Liu, and Lydia Chilton. Sparks: Inspiration for science
+writing using language models. InDesigning Interactive Systems Conference,
+pages 1002–1019, 2022.
+Yaru Hao, Zewen Chi, Li Dong, and Furu Wei. Optimizing prompts for text-to-
+image generation. arXiv preprint arXiv:2212.09611, 2022.
+Haque, Mubin Ul and Dharmadasa, Isuru and Sworna, Zarrin Tasnim and Ra-
+japakse, Roshan Namal and Ahmad, Hussain. "I think this is the most dis-
+ruptive technology": Exploring Sentiments of ChatGPT Early Adopters using
+Twitter Data.arXiv preprint arXiv:2212.05856, 2022.
+Barbara Kitchenham and Stuart Charters. Guidelines for performing systematic
+literature reviews in software engineering. 2, 01 2007.
+Philipp Koralus and Vincent Wang-Maścianica. Humans in humans out: On gpt
+converging toward common sense in both success and failure.arXiv preprint
+arXiv:2303.17276, 2023.
+Krishna Kumar. Geotechnical parrot tales (gpt): Harnessing large language
+models in geotechnical engineering.arXiv e-prints, pages arXiv–2304, 2023.
+Vivian Liu and Lydia B Chilton. Design Guidelines for Prompt Engineering
+Text-to-Image Generative Models. InProceedings of the 2022 CHI Conference
+on Human Factors in Computing Systems, CHI ’22, New York, NY, USA,
+2022a. Association for Computing Machinery. ISBN 9781450391573.https:
+//doi.org/10.1145/3491102.3501825. URL https://doi.org/10.1145/
+3491102.3501825.
+Vivian Liu and Lydia B Chilton. Design guidelines for prompt engineering text-
+to-image generative models. In Proceedings of the 2022 CHI Conference on
+Human Factors in Computing Systems, pages 1–23, 2022b.
+Tiago Lubiana, Rafael Lopes, Pedro Medeiros, Juan Carlo Silva, Andre Nico-
+lau Aquime Goncalves, Vinicius Maracaja-Coutinho, and Helder I Nakaya.
+Ten quick tips for harnessing the power of chatgpt/gpt-4 in computational
+biology. arXiv preprint arXiv:2303.16429, 2023.
+Zheheng Luo, Qianqian Xie, and Sophia Ananiadou. Chatgpt as a factual
+inconsistency evaluator for abstractive text summarization. arXiv preprint
+arXiv:2303.15621, 2023.
+Jonas Oppenlaender, Rhema Linder, and Johanna Silvennoinen. Prompting ai
+art: An investigation into the creative skill of prompt engineering. arXiv
+preprint arXiv:2303.13534, 2023.
+Ethan Perez, Douwe Kiela, and Kyunghyun Cho. True Few-shot Learning with
+Language Models. Advances in neural information processing systems, 34:
+11054–11070, 2021.
+Roger S Pressman. Software engineering: a practitioner’s approach.Pressman
+and Associates, 2005.
+Alec Radford, Karthik Narasimhan, Tim Salimans, Ilya Sutskever, et al. Im-
+proving language understanding by generative pre-training. 2018.
+Laria Reynolds and Kyle McDonell. Prompt programming for large language
+models: Beyond the few-shot paradigm. In Extended Abstracts of the 2021
+CHI Conference on Human Factors in Computing Systems, pages 1–7, 2021.
+
+--- Page 18 ---
+18 Ronanki et al.
+Robson, Colin. Real World Research: A Resource for Social Scientists and
+Practitioner-Researchers. Blackwell, 1993. URL https://cir.nii.ac.jp/
+crid/1130282271686871424.
+Alberto D. Rodriguez, Katherine R. Dearstyne, and Jane Cleland-Huang.
+Prompts matter: Insights and strategies for prompt engineering in auto-
+mated software traceability. In2023 IEEE 31st International Requirements
+Engineering Conference Workshops (REW), pages 455–464, 2023. https:
+//doi.org/10.1109/REW57809.2023.00087.
+Krishna Ronanki, Beatriz Cabrero-Daniel, and Christian Berger. Chatgpt
+as a tool for user story quality evaluation: Trustworthy out of the box? InAgile
+Processes in Software Engineering and Extreme Programming – Workshops,
+pages 173–181. Springer Nature Switzerland, 2024a. ISBN 978-3-031-48550-3.
+Krishna Ronanki, Beatriz Cabrero-Daniel, Jennifer Horkoff, and Christian
+Berger. Requirements Engineering Using Generative AI: Prompts and
+Prompting Patterns, pages 109–127. Springer Nature Switzerland, Cham,
+2024b. https://doi.org/10.1007/978-3-031-55642-5_5. URL https:
+//doi.org/10.1007/978-3-031-55642-5_5.
+Yuya Sasaki, Hironori Washizaki, Jialong Li, Dominik Sander, Nobukazu Yosh-
+ioka, and Yoshiaki Fukazawa. Systematic literature review of prompt engineer-
+ing patterns in software engineering. In2024 IEEE 48th Annual Computers,
+Software, and Applications Conference (COMPSAC), pages 670–675, 2024.
+https://doi.org/10.1109/COMPSAC61105.2024.00096.
+Seaman,C.B. QualitativeMethodsinEmpiricalStudiesofSoftwareEngineering.
+IEEE Transactions on Software Engineering, 25(4):557–572, 1999. https:
+//doi.org/10.1109/32.799955.
+Ian Sommerville and Pete Sawyer.Requirements Engineering: A Good Practice
+Guide. John Wiley & Sons, Inc., USA, 1st edition, 1997. ISBN 0471974447.
+Strandberg, Per Erik. Ethical Interviews in Software Engineering. In 2019
+ACM/IEEE International Symposium on Empirical Software Engineering and
+Measurement (ESEM), pages 1–11, 2019.https://doi.org/10.1109/ESEM.
+2019.8870192.
+Dietrich Trautmann, Alina Petrova, and Frank Schilder. Legal prompt
+engineering for multilingual legal judgement prediction. arXiv preprint
+arXiv:2212.02199, 2022.
+Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones,
+Aidan N Gomez, Łukasz Kaiser, and Illia Polosukhin. Attention is all you
+need. Advances in neural information processing systems, 30, 2017.
+Andreas Vogelsang. From specifications to prompts: On the future of generative
+large language models in requirements engineering. IEEE Software, 41(5):
+9–13, 2024.https://doi.org/10.1109/MS.2024.3410712.
+Xuezhi Wang, Jason Wei, Dale Schuurmans, Quoc Le, Ed Chi, Sharan Narang,
+Aakanksha Chowdhery, and Denny Zhou. Self-consistency improves chain
+of thought reasoning in language models.arXiv preprint arXiv:2203.11171,
+2022a.
+
+--- Page 19 ---
+Title Suppressed Due to Excessive Length 19
+Xuezhi Wang, Jason Wei, Dale Schuurmans, Quoc Le, Ed Chi, and Denny
+Zhou. Rationale-augmented ensembles in language models. arXiv preprint
+arXiv:2207.00747, 2022b.
+Jing Wei, Sungdong Kim, Hyunhoon Jung, and Young-Ho Kim. Leveraging large
+language models to power chatbots for collecting user self-reported data.arXiv
+preprint arXiv:2301.05843, 2023.
+Peter West, Chandra Bhagavatula, Jack Hessel, Jena D Hwang, Liwei Jiang,
+RonanLeBras,XimingLu,SeanWelleck,andYejinChoi. Symbolicknowledge
+distillation: from general language models to commonsense models. arXiv
+preprint arXiv:2110.07178, 2021.
+Jules White, Quchen Fu, Sam Hays, Michael Sandborn, Carlos Olea, Henry
+Gilbert, Ashraf Elnashar, Jesse Spencer-Smith, and Douglas C Schmidt. A
+prompt pattern catalog to enhance prompt engineering with chatgpt.arXiv
+preprint arXiv:2302.11382, 2023a.
+Jules White, Quchen Fu, Sam Hays, Michael Sandborn, Carlos Olea, Henry
+Gilbert, Ashraf Elnashar, Jesse Spencer-Smith, and Douglas C. Schmidt. A
+Prompt Pattern Catalog to Enhance Prompt Engineering with ChatGPT,
+2023b.
+Jules White, Sam Hays, Quchen Fu, Jesse Spencer-Smith, and Douglas C
+Schmidt. Chatgpt prompt patterns for improving code quality, refactoring, re-
+quirements elicitation, and software design.arXiv preprint arXiv:2303.07839,
+2023c.
+Kailai Yang, Shaoxiong Ji, Tianlin Zhang, Qianqian Xie, and Sophia Ananiadou.
+On the evaluations of chatgpt and emotion-enhanced prompting for mental
+health analysis. arXiv preprint arXiv:2304.03347, 2023.
+Shunyu Yao, Dian Yu, Jeffrey Zhao, Izhak Shafran, Tom Griffiths, Yuan Cao,
+and Karthik Narasimhan. Tree of thoughts: Deliberate problem solving with
+large language models. Advances in Neural Information Processing Systems,
+36, 2024.
+Gunwoo Yong, Kahyun Jeon, Daeyoung Gil, and Ghang Lee. Prompt engi-
+neering for zero-shot and few-shot defect detection and classification using a
+visual-language pretrained model. Computer-Aided Civil and Infrastructure
+Engineering, 2022.
+Fangyi Yu, Lee Quartey, and Frank Schilder. Legal prompting: Teaching a lan-
+guage model to think like a lawyer.arXiv preprint arXiv:2212.01326, 2022.
+Zhao, Liping and Alhoshan, Waad and Ferrari, Alessio and Letsholo, Keletso J
+and Ajagbe, Muideen A and Chioasca, Erol-Valeriu and Batista-Navarro, Riza
+T. Natural Language Processing for Requirements Engineering: A Systematic
+Mapping Study. ACM Computing Surveys (CSUR), 54(3):1–41, 2021.
+Kaiyang Zhou, Jingkang Yang, Chen Change Loy, and Ziwei Liu. Learning to
+promptforvision-languagemodels. International Journal of Computer Vision,
+130(9):2337–2348, 2022a.
+Yongchao Zhou, Andrei Ioan Muresanu, Ziwen Han, Keiran Paster, Silviu Pitis,
+Harris Chan, and Jimmy Ba. Large language models are human-level prompt
+engineers. arXiv preprint arXiv:2211.01910, 2022b.

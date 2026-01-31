@@ -1,0 +1,12 @@
+{
+    "title": "arXiv:2507.03405v1  [cs.SE]  4 Jul 2025",
+    "authors": [
+        "Prompt Engineering Guidelines for Using Large",
+        "Language Models in Requirements Engineering",
+        "Krishna Ronanki1,2[0009\u22120001\u22128242\u22126771], Simon Arvidsson*1,2, and Johan",
+        "Axell*1,2",
+        "\u22c6"
+    ],
+    "abstract": "guage Models (LLMs) has demonstrated its utility across various ac- tivities, including within Requirements Engineering (RE). Ensuring the quality and accuracy of LLM-generated output is critical, with prompt engineering serving as a key technique to guide model responses. How- ever, existing literature provides limited guidance on how prompt en- gineering can be leveraged, specifically for RE activities. The objective of this study is to explore the applicability of existing prompt engineer- ing guidelines for the effective usage of LLMs within RE. To achieve this goal, we began by conducting a systematic review of primary literature to compile a non-exhaustive list of prompt engineering guidelines. Then, we conducted interviews with RE experts to present the extracted guidelines and gain insights on the advantages and limitations of their application within RE. Our literature review indicates a shortage of prompt engi- neering guidelines for domain-specific activities, specifically for RE. Our proposed mapping contributes to addressing this shortage. We conclude our study by identifying an important future line of research within this field.",
+    "source_file": "paper3.pdf"
+}

@@ -1,0 +1,11 @@
+{
+    "title": "1",
+    "authors": [
+        "Large Language Models Hallucination: A",
+        "Comprehensive Survey",
+        "Aisha Alansari,KFUPMand Hamzah Luqman,KFUPM",
+        "aisha.ansari@kfupm.edu.sa, hluqman@kfupm.edu.sa"
+    ],
+    "abstract": "diverse tasks. However, their impressive fluency often comes at the cost of producing false or fabricated information, a phenomenon known as hallucination. Hallucination refers to the generation of content by an LLM that is fluent and syntactically correct but factually inaccurate or unsupported by external evidence. Hallucinations undermine the reliability and trustworthiness of LLMs, especially in domains requiring factual accuracy. This survey provides a comprehensive review of research on hallucination in LLMs, with a focus on causes, detection, and mitigation. We first present a taxonomy of hallucination types and analyze their root causes across the entire LLM development lifecycle, from data collection and architecture design to inference. We further examine how hallucinations emerge in key natural language generation tasks. Building on this foundation, we introduce a structured taxonomy of detection approaches and another taxonomy of mitigation strategies. We also analyze the strengths and limitations of current detection and mitigation approaches and review existing evaluation benchmarks and metrics used to quantify LLMs hallucinations. Finally, we outline key open challenges and promising directions for future research, providing a foundation for the development of more truthful and trustworthy LLMs.",
+    "source_file": "paper4.pdf"
+}
